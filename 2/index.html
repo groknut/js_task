@@ -1,0 +1,93 @@
+
+<script>
+// 2.1
+const camelize = s => s.split('-').map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)).join('');
+let s = prompt("Введите строку вида `background-color`: ")
+console.log(camelize(s));
+// 2.2
+arr = [...Array(10).keys()].slice(1).sort((a ,b) => b - a);
+arr1 = Array.from(arr).sort();
+arr2 = [...arr].reverse();
+console.log(arr, arr1, arr2)
+// 2.3
+function translate(text, targetLanguage) {
+    const dictionary = {
+        'hello': {
+            'russian': 'привет',
+            'spanish': 'hola', 
+            'french': 'bonjour',
+            'german': 'hallo'
+        },
+        'goodbye': {
+            'russian': 'до свидания',
+            'spanish': 'adiós',
+            'french': 'au revoir',
+            'german': 'auf wiedersehen'
+        },
+        'thank you': {
+            'russian': 'спасибо',
+            'spanish': 'gracias',
+            'french': 'merci',
+            'german': 'danke'
+        },
+        'how are you': {
+            'russian': 'как дела',
+            'spanish': 'cómo estás',
+            'french': 'comment ça va',
+            'german': 'wie geht es dir'
+        }
+    };
+    
+    const lowerText = text.toLowerCase().trim();
+    
+    if (dictionary[lowerText] && dictionary[lowerText][targetLanguage]) {
+        return dictionary[lowerText][targetLanguage];
+    } else {
+        return `Перевод для "${text}" на ${targetLanguage} не найден`;
+    }
+}
+// 2.4
+const weekDays = {
+    1: 'Понедельник',
+    2: 'Вторник', 
+    3: 'Среда',
+    4: 'Четверг',
+    5: 'Пятница',
+    6: 'Суббота',
+    7: 'Воскресенье',
+
+    getCurrentDay: () => {
+        const today = new Date().getDay();
+        return weekDays[today === 0 ? 7 : today];
+    }
+}
+
+console.log(weekDays.getCurrentDay());
+
+// 2.5
+const personal = {
+    "Директор": "Иван Иванов",
+    "Менеджер": "Петр Петров",
+    "Разработчик": "Сергей Сергеев"
+};
+
+const personal2 = {
+    "Директор": "Алексей Алексеев", 
+    "Менеджер": "Дмитрий Дмитриев",
+    "Разработчик": "Ольга Орлова"
+};
+
+const print = (obj, title) => {
+    `${title}:\n` + Object.entries(obj).map(
+        ([pos, name]) => `${pos}: ${name}`
+    ).join('\n');
+} 
+
+console.log(print(personal, "ПЕРСОНАЛ"));
+console.log(print(personal2, "ПЕРСОНАЛ 2"));
+
+// 2.6
+
+
+</script>
+
