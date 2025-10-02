@@ -1,0 +1,84 @@
+<script>
+
+    // 1.7
+function areCoprime(a, b)
+{
+    [a, b] = [Math.abs(a), Math.abs(b)];
+    while (b !== 0)
+        [a, b] = [b, a % b];
+    return a === 1;
+}
+// 1.9
+function Fibonacci(n)
+{
+    let is = (x) => {
+        const s = Math.sqrt(x);
+        return s === Math.floor(s);
+    };
+
+    return is(5 * n * n + 4) || is(5 * n * n - 4);
+}
+
+// 1.10
+function doubleFactorial(n)
+{
+    if (n < 0) throw new Error("двойной факториал только для неотриц. чисел");
+
+    if (n === 0 || n === 1) return 1;
+    let res = 1;
+    for (; n >= 1; n -= 2)
+        res *= n;
+    return res;
+}
+
+// 1.14
+function interval(n, m)
+{
+    const res = [];
+    let isInterval = (num) => {
+        const numStr = Math.abs(num).toString();
+        for (let c of numStr)
+        {
+            const digit = parseInt(c);
+            if (digit === 0 || num % digit !== 0)
+                return false;
+        }
+        return true;
+    };
+    for (let num = n; num <= m; num++)
+        if (isInterval(num))
+            res.push(num);
+    return res;
+}
+
+// 1.15
+function intervalSum(n, m)
+{
+    const res = [];
+    let isInterval = (num) => {
+        let s = Math.abs(num).toString().split().map(Number).reduce((a, b) => a + b, 0);
+        return num % s === 0;
+    }
+    for (let num = n; num <= m; num++)
+        if (isInterval(num))
+            res.push(num);
+    return res;
+}
+
+
+let [a, b] = prompt("1.7 - Введите два числа для проверки на взаимную простоту:").split(' ').map(Number);
+console.log(`1.7 Числа ${a} и ${b} взаимно просты: ${areCoprime(a, b)}`);
+
+a = Number(prompt("1.9 - Введите число для проверки на число Фибоначчи:"));
+console.log(`1.9 Число ${a} является числом Фибоначчи: ${Fibonacci(a)}`);
+
+a = Number(prompt("1.10 - Введите число для вычисления двойного факториала:"));
+console.log(`1.10 Двойной факториал ${a}!! = ${doubleFactorial(a)}`);
+
+[a, b] = prompt("1.14 - Введите интервал N M для поиска чисел, делящихся на свои цифры:").split(' ').map(Number);
+console.log(`1.14 Числа от ${a} до ${b}, делящиеся на свои цифры: ${interval(a, b)}`);
+[a, b] = prompt("1.15 - Введите интервал N M для поиска чисел, делящихся на сумму своих цифр:").split(' ').map(Number);
+console.log(`1.15 Числа от ${a} до ${b}, делящиеся на сумму цифр: ${intervalSum(a, b)}`);
+
+
+</script>
