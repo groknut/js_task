@@ -1,0 +1,72 @@
+
+<!-- html верстка -->
+<title> Таблица умножения </title>
+<main>
+<table class=multi></table>
+</main>
+
+<!-- js код -->
+<script>
+
+let table = document.querySelector(".multi");
+const title_row = table.insertRow();
+title_row.insertCell(); // Пустая ячейка в углу
+
+for (let i = 1; i < 11; i++)
+{
+	const cell = title_row.insertCell();
+	cell.textContent = i;
+}
+
+for (let i = 1; i < 11; i++)
+{
+	const row = table.insertRow();
+
+	const firstCell = row.insertCell();
+	firstCell.textContent = i;
+
+	for (let j = 1; j < 11; j++)
+	{
+		const cell = row.insertCell();
+		cell.textContent = i * j;
+	}
+}
+
+</script>
+
+<!-- стили -->
+<style>
+
+:root
+{
+	--bg-color: #fff;
+	--txt-color: #222;
+}
+
+body
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.multi
+{
+	border-collapse: collapse;
+}
+
+.multi td
+{
+	border: 2px solid #000;
+	padding: 10px;
+	font-size: 16pt;
+	text-align: center;
+}
+
+.multi tr td:first-child, .multi tr:first-child td
+{
+	background-color: var(--txt-color);
+	color: var(--bg-color);
+}
+
+</style>

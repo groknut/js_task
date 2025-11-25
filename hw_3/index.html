@@ -1,0 +1,89 @@
+
+<!-- html верстка -->
+<title> Календарь на текущий месяц </title>
+<main>
+<table class=calendar></table>
+</main>
+
+<!-- js код -->
+<script>
+// переменные
+const date = new Date(),
+	month = date.getMonth(), // текущий месяц
+	year = date.getFullYear(), // текущий гож
+	daysInMonth = new Date(year, month + 1, 0).getDate(), // количество дней в текущем месяце
+	firstDayofWeek = new Date(year, month, 1).getDay() // день недели первого месяца
+;
+
+// находим таблицу и создаем титульную строку
+let table = document.querySelector(".calendar");
+const dayRow = table.insertRow();
+
+// заполняем строку порядковыми номерами дней
+for (let dayNum = 1; dayNum < 8; dayNum++)
+{
+	const cell = dayRow.insertCell();
+	cell.textContent = dayNum;
+}
+
+// создаем строку
+let currentRow = table.insertRow();
+
+// заполняем пустые ячейки перед текущим днём
+for (let i = 0; i < (firstDayofWeek === 0 ? 6 : firstDayofWeek - 1); i++)
+	currentRow.insertCell();
+
+// заполняем таблицу
+for (let day = 1; day <= daysInMonth; day++)
+{
+	if (currentRow.cells.length >= 7)
+		currentRow = table.insertRow();
+
+	const cell = currentRow.insertCell();
+	cell.textContent = day;
+
+	if (day === date.getDate())
+	{
+		cell.style.backgroundColor = 'var(--txt-color)';
+		cell.style.color = 'var(--bg-color)';
+	}
+}
+
+</script>
+
+<!-- стили -->
+<style>
+
+:root
+{
+	--bg-color: #fff;
+	--txt-color: #222;
+}
+
+body
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.calendar
+{
+	border-collapse: collapse;
+}
+
+.calendar td
+{
+	border: 2px solid #000;
+	padding: 10px;
+	font-size: 16pt;
+	text-align: center;
+}
+
+.calendar tr:first-child td
+{
+	background-color: var(--txt-color);
+	color: var(--bg-color);
+}
+
+</style>

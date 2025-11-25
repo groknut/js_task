@@ -1,0 +1,134 @@
+
+<script>
+// 2.1
+const camelize = s => s.split('-').map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)).join('');
+let s = prompt("Введите строку вида `background-color`: ")
+console.log(camelize(s));
+// 2.2
+arr = [...Array(10).keys()].slice(1).sort((a ,b) => b - a);
+arr1 = Array.from(arr).sort();
+arr2 = [...arr].reverse();
+console.log(arr, arr1, arr2)
+// 2.3
+function translate(text, targetLanguage) {
+    const dictionary = {
+        'hello': {
+            'ru': 'привет',
+            'es': 'hola', 
+            'fr': 'bonjour',
+            'gr': 'hallo'
+        },
+        'goodbye': {
+            'ru': 'до свидания',
+            'es': 'adiós',
+            'fr': 'au revoir',
+            'gr': 'auf wiedersehen'
+        },
+        'thank you': {
+            'ru': 'спасибо',
+            'es': 'gracias',
+            'fr': 'merci',
+            'gr': 'danke'
+        },
+        'how are you': {
+            'ru': 'как дела',
+            'es': 'cómo estás',
+            'fr': 'comment ça va',
+            'gr': 'wie geht es dir'
+        }
+    };
+    
+    const lowerText = text.toLowerCase().trim();
+    
+    if (dictionary[lowerText] && dictionary[lowerText][targetLanguage]) {
+        return dictionary[lowerText][targetLanguage];
+    } else {
+        return `Перевод для "${text}" на ${targetLanguage} не найден`;
+    }
+}
+
+phrase = prompt("Введите фразу на английском для перевода");
+lang = prompt("Введите доступный язык: ru, es, fr, gr");
+console.log(translate(phrase, lang));
+// 2.4
+const weekDays = {
+    1: 'Понедельник',
+    2: 'Вторник', 
+    3: 'Среда',
+    4: 'Четверг',
+    5: 'Пятница',
+    6: 'Суббота',
+    7: 'Воскресенье',
+
+    getCurrentDay: () => {
+        const today = new Date().getDay();
+        return weekDays[today === 0 ? 7 : today];
+    }
+}
+
+console.log(weekDays.getCurrentDay());
+
+// 2.5
+const personal = {
+    "Директор": "Иван",
+    "Менеджер": "Петр",
+    "Разработчик": "Сергей"
+};
+
+let copy = {...personal};
+copy["Директор"] = "Алена"
+copy["Менеджер"] = "Вячеслав"
+copy["Разработчик"] = "Илья"
+
+
+const print = (obj, title) => {
+    return `${title}:\n` + Object.entries(obj).map(
+        ([pos, name]) => `${pos}: ${name}`
+    ).join('\n');
+} 
+
+console.log(print(personal, "ПЕРСОНАЛ"));
+console.log(print(copy, "ПЕРСОНАЛ 2"));
+
+// 2.6
+
+let subjects = {
+    "items": "math, bio, hist",
+
+    add: (sub) => {
+        let s = subjects['items'].split(", ");
+        s.push(sub);
+        subjects['items'] = s.join(", ");
+    },
+
+    del: (sub) => {
+        let s = subjects['items'].split(", ");
+        let i = s.indexOf(sub);
+        if (i !== -1)
+        {
+            s.splice(i, 1);
+            subjects['items'] = s.join(", ");
+        }
+        
+    }
+};
+
+let action = String(prompt("Что хотите сделать (add, del): "));
+let input = String(prompt("Введите предмет: "));
+
+if (action === "add")
+{
+    subjects.add(input);
+    console.log(subjects);
+}
+else if (action === "del")
+{
+    subjects.del(input);
+    console.log(subjects);
+}
+
+else
+    console.log("Такого действия нет");
+
+</script>
+
