@@ -1,0 +1,286 @@
+
+* ,*::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(220, 220, 220);
+    font-size: 16px;
+    color: #707070;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+
+.app__form{
+    background: white;
+    padding-left: 14px;
+}
+
+.app__result{
+    padding: 78px 65px;
+}
+.app_title {
+    font-size: 20px;
+    margin: 0 0 .5em;
+}
+
+
+.visit-card {
+    width: 445px;
+    height: 268px;
+    background: white;
+    padding: 20px;
+    color: black;
+}
+.visit-card__item--orgname {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.visit-card__item--fio {
+    font-size: 26px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+.visit-card__item--position {
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.visit-card__item--phone,
+.visit-card__item--phone2,
+.visit-card__item--email,
+.visit-card__item--address {
+    text-align: left;
+    margin-left: 200px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+.field {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+
+.field__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.field__control {
+    display: block;
+    width: 50%;
+    font-size: 14px;
+    margin-right: 16px;
+    height: 32px;
+}
+
+
+.switcher {
+    display: inline-grid;
+    display: inline-flex;
+    grid-template-columns: repeat(3, 1fr);
+    border: solid 1px black;
+    border-radius: 2px;
+    margin-right: 20px;
+}
+.switcher__item {
+    display: block;
+}
+.switcher__label {
+     white-space: pre-wrap; 
+    display: block;
+    padding: 5px 5px 5px 5px;
+}
+.switcher input[type=radio] {
+    display: none;
+}
+.switcher input[type=radio]:checked + .switcher__label {
+    background: #D9D9D9;
+}
+.color-switcher {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+.color-switcher__item {
+    display: block;
+    position: relative;
+}
+.color-switcher__label {
+    display: block;
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+}
+.color-switcher input[type=radio] {
+    display: none;
+}
+.color-switcher input[type=radio]:checked + .color-switcher__label:before {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: white;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    top: 7px;
+    left: 7px;
+
+}
+
+label:hover, .button_submit:hover
+{
+	cursor: pointer;
+}
+
+.another-phone input[type=checkbox] {
+    display: none;
+}
+.another-phone input[type=checkbox]:not(:checked) + .another-phone__button {
+    display: block;
+}
+.another-phone input[type=checkbox]:checked + .another-phone__button {
+    display: none;
+}
+.another-phone input[type=checkbox]:not(:checked) + .another-phone__button + input[type=text] {
+    display: none;
+}
+.another-phone input[type=checkbox]:checked + .another-phone__button + input[type=text] {
+    display: inline-flex;
+}
+.another-phone input[type=checkbox]:not(:checked) + .another-phone__button + input[type=text] + .another-phone__hide {
+    display: none;
+}
+.another-phone input[type=checkbox]:checked + .another-phone__button + input[type=text] + .another-phone__hide {
+    display: inline-flex;
+}
+
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+}
+.btn-container .another-phone .field__control {
+    margin-right: 0;
+}
+.another-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+}
+.another-phone__button::before {
+    content: "+";
+    font-size: 26px; 
+    font-weight: bold; 
+    color: white; 
+    background-color: gray;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 5px;
+    margin-right: 5px;
+    vertical-align:bottom;
+}
+.another-phone__hide::before {
+    content: "-";
+    font-size: 32px; 
+    font-weight: bold; 
+    color: white; 
+    background-color: gray;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    background-position: center;
+    background-size: contain;
+}
+.icon:before,
+.icon:after {
+    content: "";
+    display: block;
+    position: absolute;
+}
+.icon--left:before {
+    top: 2px;
+    left: 2px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 10px;
+    height: 10px;
+}
+.icon--left:after {
+    top: 6px;
+    left: 2px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 14px;
+    height: 10px;
+}
+.icon--right:before {
+    top: 2px;
+    right: 2px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 10px;
+    height: 10px;
+}
+.icon--right:after {
+    top: 6px;
+    right: 2px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 14px;
+    height: 10px;
+}
+.icon--center:before {
+    top: 2px;
+    left: 5px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 10px;
+    height: 10px;
+}
+.icon--center:after {
+    top: 6px;
+    left: 3px;
+    border: solid 1px black;
+    border-width: 2px 0;
+    width: 14px;
+    height: 10px;
+}
+.button_submit {
+    border-radius: 20px;
+    border: 0;
+    background-color: #3F88E8;
+    padding: 8px 25px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.button_submit:active {
+    background-color: darkblue;
+}
