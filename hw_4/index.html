@@ -1,0 +1,187 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Визитка</title>
+	<script src="./script.js" type="text/js"></script>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+	<div class="app">
+		<div class="app__form">
+			<h1 class="app__title">Конструктор визиток</h1>
+
+
+			<form onsubmit="return handleForm(this)">
+
+				<label class="field__label">Наименование организации</label>
+				<div class="field">
+					<input class="field__control" type="text" name="orgname" value="OOO 'Ориентир'">
+				</div>
+				<label class="field__label">Фамилия, имя, отчество</label>
+
+				<div class="field">
+
+					<input class="field__control" type="text" name="fio" value="Фёдоров Иван Семенович">
+
+					<div class="switcher">
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_align" value="left">
+                            <span class="switcher__label"><i class="icon icon--left">     </i></span>
+                        </label>
+					
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_align" value="center" checked>
+                            <span class="switcher__label"><i class="icon icon--center">     </i></span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_align" value="right">
+                            <span class="switcher__label"><i class="icon icon--right">     </i></span>
+                        </label>  
+					</div>
+
+                    <div class="switcher">
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_size" value="24px">
+                            <span class="switcher__label">24px</span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_size" value="26px" checked>
+                            <span class="switcher__label">26px</span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="fio_size" value="28px">
+                            <span class="switcher__label">28px</span>
+                        </label>
+                    </div>
+        	    </div>
+                <div class="color-switcher">
+                    <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#202020">
+                        <span class="color-switcher__label" style="background: #202020;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#3F88E8">
+                        <span class="color-switcher__label" style="background: #3F88E8;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#E83F56">
+                        <span class="color-switcher__label" style="background: #E83F56;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#097A14">
+                        <span class="color-switcher__label" style="background: #097A14;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#DC0AD5">
+                        <span class="color-switcher__label" style="background: #DC0AD5;"></span>
+                    </label>
+                        <label class="color-switcher__item">
+                        <input type="radio" name="fio_color" value="#f4f420">
+                    <span class="color-switcher__label" style="background: #f4f420;"></span>
+                    </label>
+                </div>
+
+                <label class="field__label">Должность</label>
+                <div class="field">
+                    <input class="field__control" type="text" name="position" value="Менаджер по развитию">
+                    <div class="switcher">
+                        <label class="switcher__item">
+                            <input type="radio" name="position_align" value="left">
+                            <span class="switcher__label"><i class="icon icon--left">     </i></span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="position_align" value="center" checked>
+                            <span class="switcher__label"><i class="icon icon--center">     </i></span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="position_align" value="right">
+                            <span class="switcher__label"><i class="icon icon--right">     </i></span>
+                        </label>  
+                    </div>
+                    <div class="switcher">
+                        <label class="switcher__item">
+                            <input type="radio" name="position_size" value="14px">
+                            <span class="switcher__label">14px</span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="position_size" value="16px" checked>
+                            <span class="switcher__label">16px</span>
+                        </label>
+                        <label class="switcher__item">
+                            <input type="radio" name="position_size" value="18px">
+                            <span class="switcher__label">18px</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="color-switcher">
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#202020">
+                        <span class="color-switcher__label" style="background: #202020;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#303030">
+                        <span class="color-switcher__label" style="background: #303030;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#636363">
+                        <span class="color-switcher__label" style="background: #636363;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#9E9E9E">
+                        <span class="color-switcher__label" style="background: #9E9E9E;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#BBBBBB">
+                        <span class="color-switcher__label" style="background: #BBBBBB;"></span>
+                    </label>
+                    <label class="color-switcher__item">
+                        <input type="radio" name="position_color" value="#E3E3E3">
+                        <span class="color-switcher__label" style="background: #E3E3E3;"></span>
+                    </label>
+                </div>
+
+                <label class="field__label">Телефон</label>
+                <div class="field">
+                    <input class="field__control" type="text" name="phone" value="8 (999) 123-45-67">
+                </div>
+
+                <div class="field btn-container">
+                    <label class="another-phone">
+                        <input type="checkbox" name="phone2_visible"> 
+                        <span class="another-phone__button">Добавить еще один телефон</span>
+                        <input class="field__control" type="text" name="phone2" value="">
+                        <span class="another-phone__hide"></span>
+                    </label>
+                </div>
+                <label class="field__label">E-mail</label>
+                <div class="field">
+                    <input class="field__control" type="text" name="email" value="fedorov.is@orientir.org">
+                    <label> <input type="checkbox" name="email_visible" checked>Отображать</label>
+                </div>
+                <label class="field__label">Адрес</label>
+                <div class="field">
+                    <input class="field__control" type="text" name="address" value="Иркутск, Байкальская, 421, оф. 12">
+                    <label> <input type="checkbox" name="address_visible" checked>Отображать</label>
+                </div>
+                <div class="field">
+                <button type="submit" class="button_submit">Применить</button>
+                </div>
+    	    </form>
+	    </div>
+	
+    
+    <div class="app__result">
+        <div class="visit-card">
+            <div class="visit-card__item visit-card__item--orgname">ООО'Ориентир'</div>
+            <div class="visit-card__item visit-card__item--fio">Иванов Иван Семенович</div>
+            <div class="visit-card__item visit-card__item--position">Менаджер по развитию</div>
+            <div class="visit-card__item visit-card__item--phone">8 (999) 123-45-67</div>
+            <div class="visit-card__item visit-card__item--phone2"></div>
+            <div class="visit-card__item visit-card__item--email">ivanov.is@orientir.org</div>
+            <div class="visit-card__item visit-card__item--address">Иркутск, Байкальская, 421, оф. 12</div>
+        </div>
+    </div>
+</div>
+
+</body>
