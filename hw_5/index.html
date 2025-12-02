@@ -7,11 +7,14 @@
 <body>
 
 <div class="manage-task">
-<textarea id="editor"></textarea>
-<label for='priority'>📌</label>
-<input type='checkbox' id='priority' />
+<textarea rows=1 id="editor"></textarea>
 </div>
-
+<!-- 
+shift enter : опубликовать заметку
+! в начале: важная заметка
+стрелками по списку: идем по списку
+если нажали tab: удаляем заметку
+-->
 <div class="tasks">
 <h2>Task Manager</h2>
 <ul>
@@ -47,7 +50,7 @@ label[for='priority']
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	
+	padding: 10px 15px 10px 15px;
 }
 
 *
@@ -62,12 +65,21 @@ label[for='priority']
 	padding-bottom: 5px;
 }
 
+#editor:focus
+{
+	outline: none;
+}
+
 #editor
 {
 	background-color: var(--bg-color);
 	padding: 5px;
 	width: 90%;
 	resize: none;
+	border: none;
+	color: var(--txt-color);
+	font-size: 16px;
+	overflow-y: hidden;
 }
 
 .tasks ul li
@@ -97,7 +109,6 @@ label[for='priority']
 {
 	background-color: var(--bg-color);
 	border: 2px solid var(--txt-color);
-	padding: 8px 15px;
 	border-radius: 5px;
 	width: 500px;
 }
@@ -105,6 +116,7 @@ label[for='priority']
 .tasks
 {
 	margin-top: 15px;
+	padding: 8px 15px;
 }
 
 body
@@ -120,6 +132,12 @@ body
 </style>
 
 <script>
+
+// текст задачи, приоритет
+let tasks = {}
+
+
+
 </script>
 
 
