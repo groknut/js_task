@@ -182,9 +182,9 @@ body
 	padding: 0;
 }
 
-.item p
+.item:hover
 {
-	width: 
+	cursor: pointer;
 }
 
 .item
@@ -194,19 +194,21 @@ body
 	justify-content: space-between;
 }
 
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
 </style>
 
 <script>
 
 const list = document.querySelector('.tasks-list');
-const [text, prio] = ['task-text', 'priority'].map(id => 
-    document.getElementById(id));
+const [text, prio] = ['task-text', 'priority'].map(id => document.getElementById(id));
 const edit = document.querySelector('.edit-task');
 const createButton = document.querySelector('.create-btn');
 const cancelButton = document.querySelector('.cancel-btn');
 const saveButton = document.querySelector('.save-btn');
-const deleteButton = document.querySelectorAll('.delete-btn');
-const editButton = document.querySelectorAll('.edit-btn');
 let currentEditItem = null;
 
 list.addEventListener('click', function(e)
@@ -217,7 +219,7 @@ list.addEventListener('click', function(e)
 	if (e.target.classList.contains('delete-btn'))
 		item.remove();
 
-	if (e.target.classList.contains('edit-btn')) 
+	else if (e.target.classList.contains('edit-btn')) 
 	{
         const taskParagraph = item.querySelector('p');
         edit.style.display = 'block';
@@ -226,7 +228,9 @@ list.addEventListener('click', function(e)
         text.focus();
         currentEditItem = item;
     }
-		
+
+	else
+		item.querySelector('p').classList.toggle('completed');			
 })
 
 createButton.addEventListener('click', function() {
