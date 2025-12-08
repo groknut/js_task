@@ -1,56 +1,106 @@
 
 
 <head>
-<title>task-manager</title>
+<title>Task Manager</title>
 </head>
 
 <body>
 
-<div class="manage-task">
-<textarea rows=1 id="editor"></textarea>
-</div>
-<!-- 
-shift enter : опубликовать заметку
-! в начале: важная заметка
-стрелками по списку: идем по списку
-если нажали tab: удаляем заметку
--->
 <div class="tasks">
-<h2>Task Manager</h2>
-<ul>
-<li> <p>hi</p>  </li>
-<li> <p>hi</p>  </li>
-<li> <p>hi</p>  </li>
-</ul>
+<div class="menu">
+<h2>Список задач</h2>
+<button class="create-btn">Добавить</button>
 </div>
 
+<ul class="tasks-list">
+<li class="item">
+<p>hi</p>
+<div>
+<button class="edit-btn">🖊</button>
+<button class="delete-btn">🗑</button>
+</div>
+</li>
+</ul>
+
+</div>
+
+<div class="edit-task">
+<textarea id="task-text"></textarea>
+<div class=tool>
+<input type=checkbox id=priority />
+<label for=priority>High priority</label>
+<div>
+<button class="save-btn">Save</button>
+<button class="cancel-btn">Cancel</button>
+</div>
+</div>
+
+</div>
+
+</body>
+
 <style>
+
+.edit-task
+{
+	display: none;	
+}
+
+#task-text
+{
+	width: 100%;
+	background-color: var(--bg-color);
+	border: 2px solid var(--txt-color);
+	border-radius: 5px;
+	padding: 10px;
+	color: var(--txt-color);
+	resize: none;
+	overflow-y: none;
+}
+
+.tool
+{
+	width: 100%;
+	padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#priority
+{
+	display: none;
+}
+
+.priority-text
+{
+	color: var(--p-color);
+	font-weight: bold;
+}
+
+#priority:checked + label
+{
+	color: var(--p-color);
+	font-weight: bold;
+}
+
+label[for=priority]:hover
+{
+	cursor: pointer;
+}
+
+label[for=priority]
+{
+	color: var(--up-color);
+	font-size: 15px;
+}
 
 :root
 {
 	--bg-color: #1a1b26;
 	--txt-color: #acb0b4;
-	--title-color: #a75d7c;
-	--unc-color: #128dbb;
-	--c-color: #0d8461;
-}
-
-input[type="checkbox"]
-{
-	display: none;
-}
-
-label[for='priority']
-{
-	font-size: 20px;
-}
-
-.manage-task
-{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px 15px 10px 15px;
+	--up-color: #a75d7c;
+	--p-color: #0d8461;
 }
 
 *
@@ -58,87 +108,184 @@ label[for='priority']
 	font-family: monospace;
 }
 
-.tasks h2:first-child
+body
 {
-	color: var(--title-color);
-	border-bottom: 2px dashed var(--txt-color);
-	padding-bottom: 5px;
-}
-
-#editor:focus
-{
-	outline: none;
-}
-
-#editor
-{
-	background-color: var(--bg-color);
-	padding: 5px;
-	width: 90%;
-	resize: none;
-	border: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+	padding: 24px;
 	color: var(--txt-color);
-	font-size: 16px;
-	overflow-y: hidden;
+	background-color: var(--bg-color);
 }
 
-.tasks ul li
-{
-	margin: 10 0;
-	padding-left: 10px;
-	border: 2px dashed var(--txt-color);
-}
-
-.tasks ul
-{
-	list-style: none;
-	padding: 0;
-	color: var(--unc-color);
-	font-weight: bold;
-	font-size: 16px;
-}
-
-.tasks ul li:hover, .tasks ul li:focus
-{
-	background-color: var(--txt-color);
-	color: var(--bg-color);
-	cursor: pointer;
-}
-
-.tasks, .manage-task
+.tasks, .edit-task
 {
 	background-color: var(--bg-color);
 	border: 2px solid var(--txt-color);
 	border-radius: 5px;
-	width: 500px;
+	padding: 10px 15px;
 }
 
-.tasks
+.save-btn:hover, .cancel-btn:hover
 {
-	margin-top: 15px;
-	padding: 8px 15px;
+	cursor: pointer;
+	color: var(--bg-color);
+	background-color: var(--txt-color);
 }
 
-body
+.save-btn, .cancel-btn
 {
-	color: var(--txt-color);
 	background-color: var(--bg-color);
+	border: 2px solid var(--txt-color);
+	border-radius: 5px;
+	padding: 10px 15px;
+	color: var(--txt-color);
+	font-size: 15px;
+	
+}
+
+.delete-btn, .edit-btn
+{
+	font-size: 15px;
+	background-color: var(--bg-color);
+	border: 2px solid var(--txt-color);
+	border-radius: 5px;
+	padding: 10px 15px;
+	color: var(--txt-color);
+}
+
+.create-btn
+{
+	background-color: var(--bg-color);
+	border: 2px solid var(--txt-color);
+	border-radius: 5px;
+	padding: 10px 15px;
+	color: var(--txt-color);
+}
+
+.menu
+{
 	display: flex;
-	align-items: center;	
-	flex-direction: column;
-	padding: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-btn:hover, .delete-btn:hover, .edit-btn:hover
+{
+	cursor: pointer;
+	color: var(--bg-color);
+	background-color: var(--txt-color);
+}
+
+.tasks-list
+{
+	padding: 0;
+}
+
+.item p
+{
+	width: 
+}
+
+.item
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 </style>
 
 <script>
 
-// текст задачи, приоритет
-let tasks = {}
+const list = document.querySelector('.tasks-list');
+const [text, prio] = ['task-text', 'priority'].map(id => 
+    document.getElementById(id));
+const edit = document.querySelector('.edit-task');
+const createButton = document.querySelector('.create-btn');
+const cancelButton = document.querySelector('.cancel-btn');
+const saveButton = document.querySelector('.save-btn');
+const deleteButton = document.querySelectorAll('.delete-btn');
+const editButton = document.querySelectorAll('.edit-btn');
+let currentEditItem = null;
 
+list.addEventListener('click', function(e)
+{
+	const item = e.target.closest('.item');
+	if (!item) return;
 
+	if (e.target.classList.contains('delete-btn'))
+		item.remove();
+
+	if (e.target.classList.contains('edit-btn')) 
+	{
+        const taskParagraph = item.querySelector('p');
+        edit.style.display = 'block';
+        text.value = taskParagraph.textContent;
+        prio.checked = taskParagraph.classList.contains('priority-text');
+        text.focus();
+        currentEditItem = item;
+    }
+		
+})
+
+createButton.addEventListener('click', function() {
+    edit.style.display = 'block';
+    text.value = '';
+    prio.checked = false;
+    text.focus();
+    currentEditItem = null;
+});
+
+cancelButton.addEventListener('click', function() {
+    edit.style.display = 'none';
+    text.value = '';
+    prio.checked = false;
+    currentEditItem = null;
+});
+
+saveButton.addEventListener('click', function() 
+{
+    const txt = text.value.trim();
+    if (!txt)
+        return;
+    
+    if (currentEditItem) 
+    {
+        const taskParagraph = currentEditItem.querySelector('p');
+        taskParagraph.textContent = txt;
+        
+        if (prio.checked)
+            taskParagraph.classList.add('priority-text');
+        else
+            taskParagraph.classList.remove('priority-text');
+    } 
+    else 
+    {
+    	const newItem = document.createElement('li');
+    	newItem.className = 'item';
+
+		const paragraph = document.createElement('p');
+		paragraph.textContent = txt;
+		if (prio.checked)
+		    paragraph.classList.add('priority-text');
+
+		const buttonDiv = document.createElement('div');
+		buttonDiv.innerHTML = `
+		    <button class="edit-btn">🖊</button>
+		    <button class="delete-btn">🗑</button>
+		`;
+
+		newItem.appendChild(paragraph);
+		newItem.appendChild(buttonDiv);
+
+		list.prepend(newItem);
+    }
+    
+    edit.style.display = 'none';
+    text.value = '';
+    prio.checked = false;
+    currentEditItem = null;
+});
 
 </script>
-
-
-</body>
