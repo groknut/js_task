@@ -40,6 +40,29 @@
 
 <style>
 
+:root
+{
+	--bg-color: #1a1b26;
+	--txt-color: #acb0b4;
+	--up-color: #a75d7c;
+	--p-color: #0d8461;
+}
+
+*
+{
+	font-family: monospace;
+}
+
+body
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+	padding: 24px;
+	color: var(--txt-color);
+	background-color: var(--bg-color);
+}
+
 .edit-task
 {
 	display: none;	
@@ -94,28 +117,7 @@ label[for=priority]
 	font-size: 15px;
 }
 
-:root
-{
-	--bg-color: #1a1b26;
-	--txt-color: #acb0b4;
-	--up-color: #a75d7c;
-	--p-color: #0d8461;
-}
 
-*
-{
-	font-family: monospace;
-}
-
-body
-{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 20px;
-	padding: 24px;
-	color: var(--txt-color);
-	background-color: var(--bg-color);
-}
 
 .tasks, .edit-task
 {
