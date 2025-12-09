@@ -1,41 +1,40 @@
 
 
 <head>
-<title>Task Manager</title>
+	<title>Task Manager</title>
 </head>
 
 <body>
 
-<div class="tasks">
-<div class="menu">
-<h2>Список задач</h2>
-<button class="create-btn">Добавить</button>
-</div>
+	<div class="tasks">
+		<div class="menu">
+			<h2>Список задач</h2>
+			<button class="create-btn">Добавить</button>
+		</div>
 
-<ul class="tasks-list">
-<li class="item">
-<p>hi</p>
-<div>
-<button class="edit-btn">🖊</button>
-<button class="delete-btn">🗑</button>
-</div>
-</li>
-</ul>
+	<ul class="tasks-list">
+		<li class="item">
+			<p>hi</p>
+			<div>
+				<button class="edit-btn">🖊</button>
+				<button class="delete-btn">🗑</button>
+			</div>
+		</li>
+	</ul>
 
-</div>
+	</div>
 
-<div class="edit-task">
-<textarea id="task-text"></textarea>
-<div class=tool>
-<input type=checkbox id=priority />
-<label for=priority>High priority</label>
-<div>
-<button class="save-btn">Save</button>
-<button class="cancel-btn">Cancel</button>
-</div>
-</div>
-
-</div>
+	<div class="edit-task">
+		<textarea id="task-text"></textarea>
+		<div class=tool>
+			<input type=checkbox id=priority />
+			<label for=priority>High priority</label>
+			<div>
+				<button class="save-btn">Save</button>
+				<button class="cancel-btn">Cancel</button>
+			</div>
+		</div>
+	</div>
 
 </body>
 
@@ -192,11 +191,13 @@ body
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 10;
+	font-size: 15px;
 }
 
 .completed {
     text-decoration: line-through;
-    opacity: 0.6;
+    font-style: italic;
 }
 
 </style>
@@ -251,6 +252,7 @@ cancelButton.addEventListener('click', function() {
 saveButton.addEventListener('click', function() 
 {
     const txt = text.value.trim();
+
     if (!txt)
         return;
     
@@ -264,6 +266,7 @@ saveButton.addEventListener('click', function()
         else
             taskParagraph.classList.remove('priority-text');
     } 
+    
     else 
     {
     	const newItem = document.createElement('li');
