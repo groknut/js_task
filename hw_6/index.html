@@ -543,9 +543,46 @@
     
     <div id="gameInfo" class="game-info">Сделайте первый ход!</div>
     
-    <!-- <p>Нажмите на "R", если хотите перезапустить игру</p> -->
-
     <script>
+
+        const gameEvents = {
+            onStart: null,
+            onStep: null,
+            onEnd: null
+        };
+
+        function dispatchGameEvent(eventName, detail={})
+        {
+            const event = new CustomEvent(eventName, {detail});
+            document.dispatchEvent(event);
+
+            switch(eventName)
+            {
+                case 'mine.start':
+                    if (gameEvents.onStart) gameEvents.onStart(detail);
+                    break;
+                case 'mine.step':
+                    if (gameEvents.onStep) gameEvents.onStep(detail);
+                    break;
+                case 'mine.end':
+                    if (gameEvents.onEnd) gameEvents.onEnd(detail);
+                    break;
+            }
+
+        }
+
+        function setMineStartHandler(handler) {
+            gameEvents.onStart = handler;
+        }
+
+        function setMineStepHandler(handler) {
+            gameEvents.onStep = handler;
+        }
+
+        function setMineEndHandler(handler) {
+            gameEvents.onEnd = handler;
+        }
+
         const SIZE = 12;
         const MINES = Math.floor(SIZE * SIZE * 0.16);
         
@@ -599,14 +636,37 @@
                 firstClick = false;
                 startTimer();
                 updateGameInfo(message);
+
+                dispatchGameEvent('mine.start',
+                    {
+                        row: row,
+                        col: col,
+                        size: SIZE,
+                        mines: MINES
+                    }
+                );
             }
             
+            dispatchGameEvent('mine.step', {
+                row: row,
+                col: col,
+                action: 'reveal'
+            });
+
             revealed[row][col] = true;
             
             if (board[row][col] === 'mine') {
                 gameOver = true;
                 stopTimer();
                 updateGameInfo("💥 Вы проиграли!");
+
+                dispatchGameEvent('mine.end', {
+                    result: 'lose',
+                    time: timer,
+                    reason: 'hit_mine',
+                    flags: flagsPlaced
+                });
+
                 revealAllMines();
                 return;
             }
@@ -646,6 +706,14 @@
                 flagged[row][col] = true;
                 flagsPlaced++;
             }
+
+            dispatchGameEvent('mine.step', {
+                row: row,
+                col: col,
+                action: flagged[row][col] ? 'flag_set' : 'flag_remove',
+                flags: flagsPlaced
+            });
+
             document.getElementById('flags').textContent = flagsPlaced;
             renderBoard();
         }
@@ -674,6 +742,15 @@
                 gameOver = true;
                 stopTimer();
                 updateGameInfo("🎉 Поздравляем! Вы выиграли!");
+
+                dispatchGameEvent('mine.end', {
+                    result: 'win',
+                    time: timer,
+                    reason: 'all_cells_revealed',
+                    flags: flagsPlaced,
+                    revealed: revealedCount,
+                    correctFlags: correctFlags
+                });
             }
         }
         
@@ -790,6 +867,18 @@
         { 
             if (e.key === 'R' || e.key === 'r')
                 restartGame(); 
+        });
+
+        document.addEventListener('mine.start', (e) => {
+            console.log('Событие mine.start:', e.detail);
+        });
+
+        document.addEventListener('mine.step', (e) => {
+            console.log('Событие mine.step:', e.detail);
+        });
+
+        document.addEventListener('mine.end', (e) => {
+            console.log('Событие mine.end:', e.detail);
         });
 
     </script>
