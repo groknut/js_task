@@ -1,0 +1,99 @@
+
+:root
+{
+    --bg-color: #f0f0f0;
+    --txt-color: #1d1a1a;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: monospace;
+}
+
+.puzzle {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  gap: 150px;
+}
+
+.puzzle > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.puzzle h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.field, .picture {
+  width: 100%;
+  height: 500px;
+  border: 6px solid var(--txt-color);
+  border-radius: 20px;
+  background-color: var(--bg-color);
+}
+
+.puzzle-piece.locked {
+    cursor: not-allowed;
+}
+
+.picture {
+  position: relative;
+  overflow: hidden;
+}
+
+.sourceImage {
+  display: none;
+}
+
+.puzzle-piece {
+  display: inline-block;
+  border: 1px solid #654321;
+  border-radius: 5px;
+  cursor: grab;
+  margin: 2px;
+}
+
+.picture-cell {
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.field{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.picture-cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.picture-cell .puzzle-piece{
+  margin: 0;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.picture-cell.drag-over{
+  outline: 2px solid var(--txt-color);
+  outline-offset: -2px;
+}
+.field.drag-over{
+  outline: 2px solid var(--txt-color);
+  outline-offset: -6px;
+}
