@@ -55,7 +55,7 @@ body {
 
 .puzzle-piece {
   display: inline-block;
-  border: 1px solid #654321;
+  border: 1px solid var(--txt-color);
   border-radius: 5px;
   cursor: grab;
   margin: 2px;

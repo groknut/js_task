@@ -1,28 +1,32 @@
 (function () {
-  document.addEventListener('DOMContentLoaded', function () {
-    const field = document.querySelector('.field');
-    const picture = document.querySelector('.picture');
-    const sourceImage = document.querySelector('.sourceImage');
+  document.addEventListener('DOMContentLoaded', () => {
 
-    const IMAGE_WIDTH = 300;
-    const IMAGE_HEIGHT = 300;
-    const PIECE_WIDTH = 50;
-    const PIECE_HEIGHT = 50;
+    const Elements = {
+        field: document.querySelector('.field'),
+        picture: document.querySelector('.picture'),
+        sourceImage: document.querySelector('.sourceImage')
+    };
 
-    const cols = IMAGE_WIDTH / PIECE_WIDTH;
-    const rows = IMAGE_HEIGHT / PIECE_HEIGHT;
+    const Config = {
+        IMAGE_WIDTH: 300,
+        IMAGE_HEIGHT: 300,
+        PIECE_WIDTH: 50,
+        PIECE_HEIGHT: 50
+    };
+
+    const cols = Config.IMAGE_WIDTH / Config.PIECE_WIDTH;
+    const rows = Config.IMAGE_HEIGHT / Config.PIECE_HEIGHT;
     const totalPieces = cols * rows;
 
-    let puzzlePieces = [];
     let pieceIdCounter = 0;
 
     function createPictureGrid() {
-      picture.innerHTML = '';
+      Elements.picture.innerHTML = '';
 
-      const totalGridWidth = cols * PIECE_WIDTH;
-      const totalGridHeight = rows * PIECE_HEIGHT;
-      const offsetX = (picture.offsetWidth - totalGridWidth) / 2;
-      const offsetY = (picture.offsetHeight - totalGridHeight) / 2;
+      const totalGridWidth = cols * Config.PIECE_WIDTH;
+      const totalGridHeight = rows * Config.PIECE_HEIGHT;
+      const offsetX = (Elements.picture.offsetWidth - totalGridWidth) / 2;
+      const offsetY = (Elements.picture.offsetHeight - totalGridHeight) / 2;
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
@@ -32,10 +36,10 @@
           cell.dataset.col = String(col);
 
           cell.style.position = 'absolute';
-          cell.style.left = `${offsetX + col * PIECE_WIDTH}px`;
-          cell.style.top = `${offsetY + row * PIECE_HEIGHT}px`;
-          cell.style.width = `${PIECE_WIDTH}px`;
-          cell.style.height = `${PIECE_HEIGHT}px`;
+          cell.style.left = `${offsetX + col * Config.PIECE_WIDTH}px`;
+          cell.style.top = `${offsetY + row * Config.PIECE_HEIGHT}px`;
+          cell.style.width = `${Config.PIECE_WIDTH}px`;
+          cell.style.height = `${Config.PIECE_HEIGHT}px`;
           cell.style.border = '1px dashed var(--txt-color)';
           cell.style.boxSizing = 'border-box';
 
@@ -43,7 +47,7 @@
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDropToCell);
 
-          picture.appendChild(cell);
+          Elements.picture.appendChild(cell);
         }
       }
     }
@@ -52,11 +56,11 @@
       const piece = document.createElement('div');
       const index = row * cols + col;
 
-      piece.style.width = `${PIECE_WIDTH}px`;
-      piece.style.height = `${PIECE_HEIGHT}px`;
-      piece.style.backgroundImage = `url(${sourceImage.src})`;
-      piece.style.backgroundPosition = `-${col * PIECE_WIDTH}px -${row * PIECE_HEIGHT}px`;
-      piece.style.backgroundSize = `${IMAGE_WIDTH}px ${IMAGE_HEIGHT}px`;
+      piece.style.width = `${Config.PIECE_WIDTH}px`;
+      piece.style.height = `${Config.PIECE_HEIGHT}px`;
+      piece.style.backgroundImage = `url(${Elements.sourceImage.src})`;
+      piece.style.backgroundPosition = `-${col * Config.PIECE_WIDTH}px -${row * Config.PIECE_HEIGHT}px`;
+      piece.style.backgroundSize = `${Config.IMAGE_WIDTH}px ${Config.IMAGE_HEIGHT}px`;
 
       piece.className = 'puzzle-piece';
       piece.draggable = true;
@@ -75,15 +79,13 @@
     }
 
     function createPuzzlePieces() {
-      field.innerHTML = '';
-      puzzlePieces = [];
+      Elements.field.innerHTML = '';
       pieceIdCounter = 0;
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
           const piece = makePiece(row, col);
-          puzzlePieces.push(piece);
-          field.appendChild(piece);
+          Elements.field.appendChild(piece);
         }
       }
     }
@@ -143,7 +145,7 @@
 
     function onDropToField(e) {
       e.preventDefault();
-      field.classList.remove('drag-over');
+      Elements.field.classList.remove('drag-over');
 
       const pieceId = e.dataTransfer.getData('text/plain');
       const piece = getPieceById(pieceId);
@@ -154,19 +156,19 @@
         piece.draggable = true;
       }
 
-      field.appendChild(piece);
+      Elements.field.appendChild(piece);
     }
 
     function attachFieldDnD() {
-      field.addEventListener('dragover', function (e) {
+      Elements.field.addEventListener('dragover', function (e) {
         e.preventDefault();
-        field.classList.add('drag-over');
+        Elements.field.classList.add('drag-over');
         e.dataTransfer.dropEffect = 'move';
       });
-      field.addEventListener('dragleave', function () {
-        field.classList.remove('drag-over');
+      Elements.field.addEventListener('dragleave', function () {
+        Elements.field.classList.remove('drag-over');
       });
-      field.addEventListener('drop', onDropToField);
+      Elements.field.addEventListener('drop', onDropToField);
     }
 
     function checkPiecePosition(piece, cell) {
@@ -188,10 +190,10 @@
       const piecesToShuffle = [];
       const lockedPieces = [];
       
-      const fieldPieces = Array.from(field.querySelectorAll('.puzzle-piece'));
+      const fieldPieces = Array.from(Elements.field.querySelectorAll('.puzzle-piece'));
       piecesToShuffle.push(...fieldPieces);
 
-      const picturePieces = Array.from(picture.querySelectorAll('.puzzle-piece'));
+      const picturePieces = Array.from(Elements.picture.querySelectorAll('.puzzle-piece'));
       picturePieces.forEach(piece => {
         if (!piece.classList.contains('locked')) {
           piecesToShuffle.push(piece);
@@ -211,8 +213,8 @@
         piecesToShuffle[j] = tmp;
       }
       
-      field.innerHTML = '';
-      piecesToShuffle.forEach(p => field.appendChild(p));
+      Elements.field.innerHTML = '';
+      piecesToShuffle.forEach(p => Elements.field.appendChild(p));
       
       clearDragOverStyles();
     }
@@ -222,13 +224,13 @@
       allPieces.forEach(p => {
         p.classList.remove('locked');
         p.draggable = true;
-        field.appendChild(p);
+        Elements.field.appendChild(p);
       });
       clearDragOverStyles();
     }
 
     function checkWin() {
-      const cells = Array.from(picture.querySelectorAll('.picture-cell'));
+      const cells = Array.from(Elements.picture.querySelectorAll('.picture-cell'));
       let ok = 0;
 
       for (let i = 0; i < cells.length; i++) {
@@ -256,14 +258,6 @@
       attachFieldDnD();
       shufflePieces();
 
-    //   mixButton.addEventListener('click', shufflePieces);
-
-    //   newGameButton.addEventListener('click', function () {
-    //     createPictureGrid();
-    //     createPuzzlePieces();
-    //     shufflePieces();
-    //   });
-
       window.addEventListener('resize', function () {
         const placements = new Map();
         document.querySelectorAll('.puzzle-piece').forEach(p => {
@@ -286,9 +280,9 @@
           if (!piece) return;
           
           if (!pos) {
-            field.appendChild(piece);
+            Elements.field.appendChild(piece);
           } else {
-            const cell = picture.querySelector(
+            const cell = Elements.picture.querySelector(
               `.picture-cell[data-row="${pos.row}"][data-col="${pos.col}"]`
             );
             if (cell && !cell.firstElementChild) {
@@ -298,17 +292,17 @@
                 piece.draggable = false;
               }
             } else {
-              field.appendChild(piece);
+              Elements.field.appendChild(piece);
             }
           }
         });
       });
     }
 
-    if (sourceImage.complete) {
+    if (Elements.sourceImage.complete) {
       init();
     } else {
-      sourceImage.onload = init;
+      Elements.sourceImage.onload = init;
     }
   });
 })();
