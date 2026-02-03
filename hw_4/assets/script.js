@@ -39,14 +39,6 @@ fields.forEach(field=>{
         }
     })
 
-    /*
-    if (frm[field + '_size']) {
-        r.style.fontSize = frm[field + '_size'].value;
-    }
-    if (frm[field + '_color']) {
-        r.style.color = frm[field + '_color'].value;
-    }
-    */
 })
 return false;
 }
